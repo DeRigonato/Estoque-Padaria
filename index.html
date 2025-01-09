@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="home-link">Sistema Padoca</a>
+        </div>       
+    </header>
+
+    <main>
+        <section class="container">
+            <div class="containerButton" onmouseenter="entrou()">
+                <a href="cadastrar.html">Cadastrar</a>
+            </div>
+            <div class="containerButton">
+                <a href="buscar.html">Buscar</a>
+            </div>
+            <div class="containerButton">
+                <a href="listar.html">Listar</a>
+            </div>
+
+        <script>
+            let buttons = document.querySelectorAll('.containerButton');
+
+            buttons.forEach(button => {
+
+                button.addEventListener('click', function() {
+                    let link = this.querySelector('a');
+                    if (link) {
+                        window.location.href = link.href;
+                    }
+                });
+
+
+                buttons.forEach(button => {
+                    button.addEventListener('mouseenter', function() {
+                        this.style.backgroundColor = '#f0f0f0';
+                    });
+                    button.addEventListener('mouseleave', function() {
+                        this.style.backgroundColor = '#ebad51';
+                    });
+                });
+            });
+        </script>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; AndreRigonato</p>
+    </footer>
+</body>
+</html>

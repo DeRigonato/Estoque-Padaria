@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastrar</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <a href="index.html" class="home-link">Sistema Padoca</a>
+      </div>
+    </header>
+    <main>
+      <section>
+        <form action="banco de dados\produtos.php" method="POST" class="form">
+          <label for="produto">Produto</label>
+          <input type="text" name="produto" id="produto" required />
+          <label for="id">ID</label>
+          <input type="number" name="id" id="id" required /><br />
+          <label for="categoria" style="margin-top: 12px">Categoria</label>
+          <select
+            name="categoria"
+            id="categoria"
+            required
+            style="margin-top: 12px"
+          >
+            <option value="pao">Pão</option>
+            <option value="doce">Doce</option>
+            <option value="salgado">Salgado</option>
+            <option value="bebida">Bebida</option>
+            <option value="bolo">Bolo</option>
+            <option value="outro">Outro</option>
+          </select>
+          <label for="quantidade" style="margin-top: 12px">Quantidade</label>
+          <input
+            type="number"
+            name="quantidade"
+            id="quantidade"
+            required
+            style="margin-top: 12px"
+          />
+          <div style="margin-top: 12px">
+            <button class="btn" type="submit">Cadastrar</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      let buttons = document.querySelectorAll(".btn");
+
+      buttons.forEach((button) => {
+        button.addEventListener("mouseenter", function () {
+          this.style.backgroundColor = "#f0f0f0";
+        });
+        button.addEventListener("mouseleave", function () {
+          this.style.backgroundColor = "#ebad51";
+        });
+      });
+    </script>
+  </body>
+</html>
