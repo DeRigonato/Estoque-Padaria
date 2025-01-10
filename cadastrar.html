@@ -60,5 +60,26 @@
         });
       });
     </script>
+
+    <script>
+
+      function getURLparams(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      const status = getURLparams('status');
+      const message = getURLparams('message');
+
+      if(message){
+        alert(message);
+      }
+
+      window.history.replaceState({}, documente.title, window.location.pathname);
+    </script>
+
+    <footer>
+      <p>&copy; AndreRigonato</p>
+
   </body>
 </html>

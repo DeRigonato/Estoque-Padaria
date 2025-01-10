@@ -19,10 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute();
     
     if ($stmt->execute()) {
-        echo 'Produto cadastrado com sucesso';
+        header('Location: ../cadastrar.html?=status=success&message=Produto cadastrado com sucesso!');
     } else {
-        echo 'Erro ao cadastrar produto';
+        header('Location: ../cadastrar.html?=status=error&message=Erro ao cadastrar produto!');
     }
 }else {
-    echo 'Método não permitido';
+    header('Location: /cadastrar.html?=status=error&message=Erro ao cadastrar produto!');
 }
