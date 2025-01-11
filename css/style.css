@@ -67,7 +67,7 @@ body {
     margin: 8em auto;
     background-color: rgb(207, 207, 207);
     width: 35%;
-    max-width: 600px; /* Define um limite para formulários */
+    max-width: 600px;
     padding: 2em;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
