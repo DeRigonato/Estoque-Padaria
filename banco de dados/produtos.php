@@ -26,3 +26,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }else {
     header('Location: /cadastrar.html?=status=error&message=Erro ao cadastrar produto!');
 }
+$conexao->close();
+?>

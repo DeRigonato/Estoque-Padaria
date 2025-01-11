@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Cadastrar</title>
+        <title>Buscar Produto</title>
         <link rel="stylesheet" href="css/style.css" />
         </head>
     <body>
@@ -14,13 +14,60 @@
         </header>
         <main>
         <section>
-            <form action="" method="GET" class="form">
+            <form id="buscarForm" class="form">
                 <label for="id">ID do Produto</label>
                 <input type="number" name="id" id="id" placeholder="Digite aqui o ID do produto" required />
                 <button class="btn" type="submit">Buscar</button>
             </form>
+            <div id="resultados" class="resultados">
+
+            </div>
         </section>
         </main>
+
+        <script>
+            document.getElementById('buscarForm').addEventListener('submit', async function(event){
+                event.preventDefault();
+
+                const produtoId = document.getElementById('id').value.trim();
+                const resultadosContainer = document.getElementById('resultados');
+                resultadosContainer.innerHTML = '';
+
+                if(!produtoId){
+                    resultadosContainer.textContent = 'Por favor, digite um ID válido';
+                    return;
+                }
+                try{
+                    const response = await fetch('banco de dados/search.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams({
+                            id: produtoId,
+                        }),
+                    });
+                    const data = await response.json();
+
+                    if(data.status === 'success'){
+                        resultadosContainer.innerHTML = `
+                            <div class="container">
+                                <h3>Produto Encontrado</h3>
+                                <p><strong>ID:</strong> ${data.produto.id}</p>
+                                <p><strong>Produto:</strong> ${data.produto.produto}</p>
+                                <p><strong>Categoria:</strong> ${data.produto.categoria}</p>
+                                <p><strong>Quantidade:</strong> ${data.produto.quantidade}</p>
+                            </div>
+                        `;
+                    }else{
+                        resultadosContainer.textContent = data.message || 'Produto não encontrado';
+                    }
+                }catch(error){
+                    resultadosContainer.textContent = 'Erro de conexão';
+                    console.error('Erro:',error);
+                }
+            });
+        </script>
 
         <footer>
             <p>&copy; AndreRigonato</p>
