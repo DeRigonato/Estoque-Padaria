@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Todos os Produtos</title>
+        <link rel="stylesheet" href="css/style.css" />
+        </head>
+    <body>
+        <header>
+            <div class="navbar">
+                <a href="index.html" class="home-link">Sistema Padoca</a>
+            </div>
+        </header>
+        <main>
+        <section class="container">
+            <div>
+                <form action="banco de dados/listar.php" method="POST" id="buscarForm">
+                    <button class="btn" type="submit">Buscar Produtos</button>
+                </form>
+            </div>
+            <div id="resultados" class="resultados">
+                <!-- Aqui será exibido o resultado da busca -->
+
+            </div>
+        </section>
+        </main>
+        <script>
+             document.getElementById('buscarForm').addEventListener('submit', async function(event){
+                event.preventDefault();
+                const resultadosContainer = document.getElementById('resultados');
+
+                async function listarProdutos() {
+                    try{
+                        const response = await fetch('banco de dados/listar.php');
+
+                        if(!response.ok){
+                            throw new Error('Erro ao buscar produtos');
+                        }
+                        
+                        const data = await response.json();
+                        console.log(data);
+
+                        if(data.status === 'success'){
+                            resultadosContainer.innerHTML = '';
+                            data.produtos.forEach(produto => {
+                                console.log(produto);
+                                resultadosContainer.innerHTML += `
+                                    <div class="container">
+                                        <h3>Produto(s) Encontrado(s)</h3>
+                                        <p><strong>ID:</strong> ${produto.id}</p>
+                                        <p><strong>Produto:</strong> ${produto.produto}</p>
+                                        <p><strong>Categoria:</strong> ${produto.categoria}</p>
+                                        <p><strong>Quantidade:</strong> ${produto.quantidade_total}</p>
+                                    </div>
+                                `;
+                            })
+                        } else {
+                            resultadosContainer.textContent = 'Nenhum produto encontrado';
+                        }
+                    } catch(error){
+                        resultadosContainer.textContent = 'Erro ao buscar produtos';
+                        console.error('Error:', error);
+                    }
+                }
+                listarProdutos();
+             });
+        </script>
+        <footer>
+            <p>&copy; AndreRigonato</p>
+        </footer>
+    </body>
+</html>
